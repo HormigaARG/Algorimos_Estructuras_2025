@@ -1,3 +1,4 @@
+#Implementar una función para calcular el producto de dos números enteros dados.
 #def planteamiento: a+producto(a,b-1) -> si b==0: entonces es cero
 def producto_recursivo(a,b):
     if b==0:
