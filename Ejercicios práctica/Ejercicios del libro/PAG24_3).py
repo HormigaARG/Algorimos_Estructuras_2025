@@ -1,13 +1,10 @@
-#Implementar una función para calcular el producto de dos números enteros dados.
-#def planteamiento: a+producto(a,b-1) -> si b==0: entonces es cero
-def producto_recursivo(a,b):
+#3. Implementar una función para calcular el producto de dos números enteros dados.
+
+#producto(5,2)= a+producto(a,b-1) -> si (b==0 Return 0)
+def producto(a,b):
     if b==0:
         return 0
-    elif b>0: #Si b es positivo, sumamos a, b veces
-        return a + producto_recursivo(a,b-1) 
-    else:    #Si b es negativo, llamamos a la funcion para el valor positivo y cambiamos el signo
-        return -producto_recursivo(a,-b)
-    
-resultado=producto_recursivo(5,2)
-print(resultado)
-    
+    else:
+        return a+producto(a,b-1) 
+
+print(f"El producto de 5 y 3 es: {producto(5,3)} ")

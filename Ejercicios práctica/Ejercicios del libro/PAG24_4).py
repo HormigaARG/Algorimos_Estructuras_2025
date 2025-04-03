@@ -1,11 +1,11 @@
 #Implementar una función para calcular la potencia dado dos números enteros, el primero representa la base y segundo el exponente.
-#def planteamiento: a*producto(a,b-1) -> si b==0: entonces es cero
-def producto_recursivo(a,b):
-    if b==1:
+#potencia(a,b)= a*producto(a,b-1) -> si (b==0) Return 1 / (b==1) Return a
+def potencia(a,b):
+    if b==0:
+        return 1
+    elif b==1:
         return a
-    elif b>0: #Si b es positivo, sumamos a, b veces
-        return a * producto_recursivo(a,b-1) 
+    else:
+        return a*potencia(a,b-1) 
     
-resultado=producto_recursivo(5,2)
-print(resultado)
-    
+print(f"La potencia entre la base 5 y el exponente 2 es: {potencia(5,2)}")
