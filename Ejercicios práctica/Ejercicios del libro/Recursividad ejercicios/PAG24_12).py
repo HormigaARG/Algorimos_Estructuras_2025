@@ -7,5 +7,4 @@ def euclides(a, b):
     else:
         return euclides(b, a % b) #b es el nuevo a y (a % b) es el nuevo b, el valor de (a % b) seria el residuo
 
-
 print(f"El MCD de 156 y 120 es: {euclides(156,120)}")
