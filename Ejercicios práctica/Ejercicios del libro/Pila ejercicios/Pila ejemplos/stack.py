@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-class OcurrenciaNumero:
+class Stack:
 
     def __init__(self):
         self.__elements = []
@@ -11,8 +11,8 @@ class OcurrenciaNumero:
 
     def pop(self) -> Optional[Any]:
         return (
-            self.__elements.pop()
-            if self.__elements
+            self.__elements.pop() 
+            if self.__elements #VERIFICA SI TIENE ELEMENTOS O NO
             else None
         )
 
@@ -21,8 +21,17 @@ class OcurrenciaNumero:
 
     def on_top(self) -> Optional[Any]:
         return (
-            self.__elements[-1]
+            self.__elements[-1] #OBJETO QUE ESTA EN LA CIMA
             if self.__elements
             else None
         )
+
+    def show(self):
+        aux_stack = Stack()
+        while self.size() > 0:
+            value = self.pop()
+            print(value)
+            aux_stack.push(value)
         
+        while aux_stack.size() > 0:
+            self.push(aux_stack.pop())

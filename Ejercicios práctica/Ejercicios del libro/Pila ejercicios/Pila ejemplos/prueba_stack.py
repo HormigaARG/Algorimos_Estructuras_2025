@@ -21,9 +21,10 @@ while number_stack.size() > 0:
     else:
         odds_stack.push(number)
 
-print("pila par")
+print("pila par: ")
 even_stack.show()
-print("pila impar")
+print()
+print("pila impar:")
 odds_stack.show()
 
 print()
