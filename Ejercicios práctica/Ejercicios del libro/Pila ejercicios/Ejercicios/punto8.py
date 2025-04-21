@@ -7,7 +7,6 @@
 from random import randint, choice
 from stack import Stack
 
-# Pilas principales
 mazo_stack = Stack()
 espada_stack = Stack()
 basto_stack = Stack()
@@ -16,15 +15,15 @@ oro_stack = Stack()
 
 palos = ["espada", "basto", "copa", "oro"]
 
-# a. Generar cartas aleatorias
+#a)
 def cargar_mazo(maz_stack):
-    for i in range(10):  # Puedes cambiar a 40 si quieres un mazo completo
+    for i in range(10): 
         numero = randint(1, 12)
         palo = choice(palos)
         carta = f"{numero} de {palo}"
         maz_stack.push(carta)
 
-# b. Separar la pila mazo por palo
+#b)
 def separar_pilas(maz_stack, esp_stack, bas_stack, cop_stack, or_stack):
     while maz_stack.size() > 0:
         carta = maz_stack.pop()
@@ -38,12 +37,12 @@ def separar_pilas(maz_stack, esp_stack, bas_stack, cop_stack, or_stack):
             or_stack.push(carta)
     
     
-# c. Ordenar una pila (ej: espada) de forma creciente por número
+#c)
 def ordenar_pila_creciente(esp_stack):
     lista = []
     while esp_stack.size() >0 :
         carta = esp_stack.pop()
-        numero = int(carta.split(" de ")[0]) #esto es para que me guarde unicamente el numero y me quite el
+        numero = int(carta.split(" de ")[0]) #esto es para que me guarde unicamente el numero y me quite el "de"
         lista.append((numero, carta)) #agrega los numeros y el palo
 
     # Ordenar por número
@@ -54,9 +53,9 @@ def ordenar_pila_creciente(esp_stack):
         esp_stack.push(carta)
 
 # Mostrar una pila con título
-def mostrar_pila(nombre, pila):
+def mostrar_pila(nombre, palo):
     print(f"{nombre}:")
-    pila.show()
+    palo.show()
     print()
 
 # Ejecutar
@@ -65,7 +64,6 @@ print("Pila original (mazo aleatorio):")
 mazo_stack.show()
 print()
 
-# Separar por palos
 separar_pilas(mazo_stack, espada_stack, basto_stack, copa_stack, oro_stack)
 
 # Mostrar pilas separadas

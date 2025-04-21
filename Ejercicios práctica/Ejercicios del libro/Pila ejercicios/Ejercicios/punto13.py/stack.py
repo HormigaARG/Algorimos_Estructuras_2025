@@ -1,21 +1,19 @@
 from typing import Any, Optional
 
 class Stack:
-
     def __init__(self):
         self.__elements = []
-        
-    def is_empty(self): #sirve para ver si la pila esta vacia
-        return len(self.items) == 0
 
+    def is_empty(self):
+        return len(self.__elements) == 0  # 🔧 corregido aquí
 
     def push(self, value: Any) -> None:
         self.__elements.append(value)
 
     def pop(self) -> Optional[Any]:
         return (
-            self.__elements.pop() 
-            if self.__elements #VERIFICA SI TIENE ELEMENTOS O NO
+            self.__elements.pop()
+            if self.__elements
             else None
         )
 
@@ -24,7 +22,7 @@ class Stack:
 
     def on_top(self) -> Optional[Any]:
         return (
-            self.__elements[-1] #OBJETO QUE ESTA EN LA CIMA
+            self.__elements[-1]
             if self.__elements
             else None
         )
@@ -35,6 +33,6 @@ class Stack:
             value = self.pop()
             print(value)
             aux_stack.push(value)
-        
+
         while aux_stack.size() > 0:
             self.push(aux_stack.pop())
