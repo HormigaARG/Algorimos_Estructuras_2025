@@ -2,9 +2,8 @@
 from stack import Stack
 palabras_stack = Stack()
 
-for i in range(5):
-    palabraIngresada=str(input(f"Ingrese la palabra {i} para visualizarla en forma inversa: "))
-    palabras_stack.push(palabraIngresada)
+palabraIngresada=str(input(f"Ingrese la palabra para visualizarla en forma inversa: "))
+palabras_stack.push(palabraIngresada)
     
 def InvertirPalabra(pal_stack):
     invertir_stack=Stack()
