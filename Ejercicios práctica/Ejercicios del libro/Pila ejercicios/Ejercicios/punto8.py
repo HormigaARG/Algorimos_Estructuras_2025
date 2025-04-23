@@ -38,19 +38,21 @@ def separar_pilas(maz_stack, esp_stack, bas_stack, cop_stack, or_stack):
     
     
 #c)
-def ordenar_pila_creciente(esp_stack):
-    lista = []
-    while esp_stack.size() >0 :
-        carta = esp_stack.pop()
-        numero = int(carta.split(" de ")[0]) #esto es para que me guarde unicamente el numero y me quite el "de"
-        lista.append((numero, carta)) #agrega los numeros y el palo
+def ordenar_pila_creciente(pila_cartas):
+    aux_stack = Stack()
 
-    # Ordenar por número
-    lista.sort()
+    while pila_cartas.size() > 0:
+        carta = pila_cartas.pop()
+        num_carta = int(carta.split(" de ")[0])
 
-    # Volver a cargar en la pila (orden creciente)
-    for (numero, carta) in reversed(lista):
-        esp_stack.push(carta)
+        while aux_stack.size() > 0 and int(aux_stack.on_top().split(" de ")[0]) > num_carta:
+            pila_cartas.push(aux_stack.pop())
+
+        aux_stack.push(carta)
+
+    while aux_stack.size() > 0:
+        pila_cartas.push(aux_stack.pop())
+
 
 # Mostrar una pila con título
 def mostrar_pila(nombre, palo):
