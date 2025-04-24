@@ -6,36 +6,35 @@
 from stack import Stack
 personajes_stack1 = Stack()
 personajes_stack2 = Stack()
-interseccion_stack = Stack()
 
-personajesV = ["Luke Skywalker", "Darth Vader", "Leia Organa", "Yoda"]
-personajesVII = ["Rey", "Poe Dameron", "Kylo Ren", "Han Solo"]
+personajesV = ["Luke Skywalker", "Darth Vader", "Han Solo", "Leia Organa"]
+personajesVII = ["Rey", "Finn", "Han Solo", "Leia Organa"]
 
 def cargarPila1(perso_stack1,personajesV):
-    for pj in personajesV:
-        perso_stack1.push(pj)
+    for personaje1 in personajesV:
+        perso_stack1.push(personaje1)
         
 def cargarPila2(perso_stack2,personajesVII):
-    for pj in personajesVII:
-        perso_stack2.push(pj)
+    for personaje2 in personajesVII:
+        perso_stack2.push(personaje2)
         
-def interseccionPilas(perso_stack1,perso_stack2,inter_stack):
-    aux_stack1=Stack()
-    aux_stack2=Stack()
+def interseccionPilas(perso_stack1,perso_stack2):
+    aux_stackpj2=Stack()
     while perso_stack1.size()>0:
-        elemento1=perso_stack1.pop()
-        aux_stack1.push(elemento1)
+       pj1=perso_stack1.pop()
+       while perso_stack2.size()>0:
+           pj2=perso_stack2.pop()
+           aux_stackpj2.push(pj2)
+           if (pj1==pj2):
+               print(f"El personaje {pj1} aparece en ambos episodios")
+               
+       while aux_stackpj2.size() > 0:
+         perso_stack2.push(aux_stackpj2.pop())
     
-    while perso_stack2.size()>0:
-        elemento2=perso_stack2.pop()
-        aux_stack2.push(elemento2)
     
-    while aux_stack1.size()>0:
-        aux_stack2.push(aux_stack1.pop())
-        
-    while aux_stack2.size()>0:
-        inter_stack.push(aux_stack2.pop())
+               
 
+#CUERPO PRINCIPAL
 cargarPila1(personajes_stack1,personajesV)
 cargarPila2(personajes_stack2,personajesVII)
 print("Pila de personajes episodio V: ")
@@ -44,6 +43,4 @@ print()
 print("Pila de personajes episodio VII: ")
 personajes_stack2.show()
 print()
-interseccionPilas(personajes_stack1,personajes_stack2,interseccion_stack)
-print("Pila de interseccion de ambas pilas: ")
-interseccion_stack.show()
+interseccionPilas(personajes_stack1,personajes_stack2)

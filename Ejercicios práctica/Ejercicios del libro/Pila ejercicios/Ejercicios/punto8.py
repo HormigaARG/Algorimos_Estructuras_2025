@@ -45,13 +45,11 @@ def ordenar_pila_creciente(pila_cartas):
         carta = pila_cartas.pop()
         num_carta = int(carta.split(" de ")[0])
 
-        while aux_stack.size() > 0 and int(aux_stack.on_top().split(" de ")[0]) > num_carta:
+        while aux_stack.size() > 0 and int(aux_stack.on_top().split(" de ")[0]) < num_carta:
             pila_cartas.push(aux_stack.pop())
 
         aux_stack.push(carta)
-
-    while aux_stack.size() > 0:
-        pila_cartas.push(aux_stack.pop())
+    return aux_stack
 
 
 # Mostrar una pila con título
@@ -75,6 +73,6 @@ mostrar_pila("Pila de copa", copa_stack)
 mostrar_pila("Pila de oro", oro_stack)
 
 # Ordenar por ejemplo la pila de espada
-ordenar_pila_creciente(espada_stack)
+ordenarPila=ordenar_pila_creciente(espada_stack)
 print("Pila de espada ordenada (creciente):")
-espada_stack.show()
+ordenarPila.show()
