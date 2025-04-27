@@ -1,6 +1,6 @@
 #2. Utilizando operaciones de cola y pila, invertir el contenido de una cola.
 
-from queue_ import Queue
+from queue import Queue
 from stack import Stack
 from random import randint
 

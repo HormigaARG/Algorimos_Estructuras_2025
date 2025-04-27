@@ -1,5 +1,5 @@
 #3. Dada una secuencia de caracteres utilizando operaciones de cola y pila determinar si es un palíndromo.
-from queue_ import Queue
+from queue import Queue
 from stack import Stack
 
 cadena_queue = Queue()
