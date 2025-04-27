@@ -1,24 +1,26 @@
 #5. Determinar si una cadena de caracteres es un palíndromo.
 from stack import Stack
-cadenas_stack = Stack()
+cadena_stack = Stack()
 
-for i in range(4):
-   cadenaIngresa=str(input(f"Ingrese la cadena {i} para ver si es palindromo: "))
-   cadenas_stack.push(cadenaIngresa)
+cadena="neuquen"
+def cargarPalabra(cade_stack,cadena):
+   for caracter in cadena:
+      cade_stack.push(caracter)
    
-def verificarPalindromo(cad_stack):
-   palindromo_stack=Stack()
-   for i in range(cad_stack.size()):
-      cadena=cad_stack.pop() #guardo el valor de la pila segun su posicion
-      cadena_invertida=cadena[::-1] #invierto la cadena que esta apilada en la pila
-      if cadena==cadena_invertida: #comparo si son iguales
-         palindromo_stack.push(cadena)  
-   return palindromo_stack
+   
+def verificarPalindromo(cad_stack,cadena):
+   cadena_invertida = ""
+   verificar=False
+   while cad_stack.size()>0:
+      cadena_invertida+=cad_stack.pop()  # voy armando la palabra invertida
+      if cadena == cadena_invertida:
+         verificar=True
+   return verificar
       
-      
-print("Pila Cargada: ")
-cadenas_stack.show()
+
+cargarPalabra(cadena_stack,cadena)
+print("Cadena ingresada: ")
+cadena_stack.show()
 print()
-print("La pila con cadenas que son palindromo: ")
-cadenas_stack=verificarPalindromo(cadenas_stack)
-cadenas_stack.show()
+verificarP=verificarPalindromo(cadena_stack,cadena)
+print(f"La cadena de caracteres es palindromo?: {verificarP}")

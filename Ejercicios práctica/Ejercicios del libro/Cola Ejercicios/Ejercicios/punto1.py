@@ -1,3 +1,5 @@
+#1. Eliminar de una cola de caracteres todas las vocales que aparecen.
+
 from queue_ import Queue
 from random import randint
 
