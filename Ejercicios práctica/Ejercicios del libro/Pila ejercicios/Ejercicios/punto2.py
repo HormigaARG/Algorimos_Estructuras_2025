@@ -3,11 +3,11 @@ from random import randint
 from stack import Stack
 number_stack = Stack()
 
-
-for i in range(5):
-    rand_number = randint(1, 100)
-    #print(rand_number)
-    number_stack.push(rand_number)
+def cargarPila(num_stack):
+    for i in range(5):
+        rand_number = randint(1, 100)
+        #print(rand_number)
+        num_stack.push(rand_number)
 
 def eliminarImpares(num_stack):
     number_par=Stack()
@@ -17,6 +17,7 @@ def eliminarImpares(num_stack):
             number_par.push(number)
     return number_par
 
+cargarPila(number_stack)
 print("Pila completa antes de modificar: ")
 number_stack.show()
 print()

@@ -2,10 +2,10 @@
 from stack import Stack
 
 number_stack = Stack()
-
-for i in range(5):
-  numeros=int(input("Ingrese 5 elementos dentro de la pila: "))
-  number_stack.push(numeros)
+def cargarPila(num_stack):
+  for i in range(5):
+    numeros=int(input("Ingrese 5 elementos dentro de la pila: "))
+    num_stack.push(numeros)
 
 def ocurrenciasElemento(num_stack, bus, cont_ocurrencia):
   for i in range(num_stack.size()):
@@ -14,6 +14,7 @@ def ocurrenciasElemento(num_stack, bus, cont_ocurrencia):
   return cont_ocurrencia
         
 contador_ocurrencia=0
+cargarPila(number_stack)
 buscado=int(input("Ingrese un determinado elemento para saber su numero de ocurrencias: "))
 print()
 print("Contenido de la pila: ")

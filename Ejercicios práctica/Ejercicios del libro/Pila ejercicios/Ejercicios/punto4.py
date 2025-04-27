@@ -3,10 +3,11 @@ from random import randint
 from stack import Stack
 number_stack = Stack()
 
-for i in range(5):
-    rand_number = randint(1, 100)
-    #print(rand_number)
-    number_stack.push(rand_number)
+def cargarPila(num_stack):
+    for i in range(5):
+        rand_number = randint(1, 100)
+        #print(rand_number)
+        num_stack.push(rand_number)
     
 def invertirAuxiliar(num_stack):
     aux_stack= Stack()
@@ -14,7 +15,7 @@ def invertirAuxiliar(num_stack):
         aux_stack.push(num_stack.pop())
     return aux_stack
 
-
+cargarPila(number_stack)
 print("Pila antes de invertir: ")
 number_stack.show()
 print()

@@ -2,9 +2,10 @@
 from stack import Stack
 palabras_stack = Stack()
 
-for i in range(4):
-    palabraIngresada=str(input(f"Ingrese la palabra {i}: "))
-    palabras_stack.push(palabraIngresada)
+def cargarPila(pala_stack):
+    for i in range(4):
+        palabraIngresada=str(input(f"Ingrese la palabra {i}: "))
+        pala_stack.push(palabraIngresada)
     
 def eliminarIesimo(pal_stack,pos):
     aux_stack=Stack()
@@ -17,7 +18,7 @@ def eliminarIesimo(pal_stack,pos):
         pal_stack.push(aux_stack.pop())
         
         
-    
+cargarPila(palabras_stack)
 print("Pila cargada de palabras: ")
 palabras_stack.show()
 print()

@@ -2,8 +2,9 @@
 from stack import Stack
 palabras_stack = Stack()
 
-palabraIngresada=str(input(f"Ingrese la palabra para visualizarla en forma inversa: "))
-palabras_stack.push(palabraIngresada)
+def cargarPila(pal_stack):
+    palabraIngresada=str(input(f"Ingrese la palabra para visualizarla en forma inversa: "))
+    pal_stack.push(palabraIngresada)
     
 def InvertirPalabra(pal_stack):
     invertir_stack=Stack()
@@ -13,6 +14,7 @@ def InvertirPalabra(pal_stack):
         invertir_stack.push(palabra_invertida)
     return invertir_stack
 
+cargarPila(palabras_stack)
 print("Pila cargada de palabras: ")
 palabras_stack.show()
 print()
