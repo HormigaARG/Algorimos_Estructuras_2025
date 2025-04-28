@@ -24,7 +24,7 @@ def eliminarNoPrimos(num_queue):
             aux_cola.arrive(element)
     
     
-    while aux_cola.size() > 0: # Reconstruimos la cola original con los números primos
+    while aux_cola.size() > 0: 
         num_queue.arrive(aux_cola.attention())
 
 
