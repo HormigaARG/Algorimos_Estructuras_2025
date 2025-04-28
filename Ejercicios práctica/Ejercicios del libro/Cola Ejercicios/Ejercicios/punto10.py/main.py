@@ -25,7 +25,7 @@ notificacion5 = Notification(15.57, "Twitter", "Nuevo video sugerido para ti de 
 
 notificaciones=[notificacion1,notificacion2,notificacion3,notificacion4,notificacion5]
 
-def cargarCola (noti_queue,notificaciones):
+def cargarCola(noti_queue,notificaciones):
     for noti in notificaciones:
         noti_queue.arrive(noti)
         
