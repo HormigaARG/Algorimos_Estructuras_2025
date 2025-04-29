@@ -10,8 +10,7 @@ def cargarCola(num_queue,numeros):
      
 def sacarMinMaximo(num_queue):
     aux_queue=Queue()
-    element=num_queue.attention()
-    aux_queue.arrive(element) #tengo que poner uno aca porque sino borro un dato
+    element=num_queue.on_front()
     min=element
     max=element
 

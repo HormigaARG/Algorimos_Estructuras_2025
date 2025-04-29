@@ -21,11 +21,11 @@ def cargarPila2(perso_stack2,personajesVII):
 def interseccionPilas(perso_stack1,perso_stack2):
     aux_stackpj2=Stack()
     while perso_stack1.size()>0:
-       pj1=perso_stack1.pop()
+       pj1=perso_stack1.pop() #SACO EL PERSONAJE
        while perso_stack2.size()>0:
            pj2=perso_stack2.pop()
            aux_stackpj2.push(pj2)
-           if (pj1==pj2):
+           if (pj1==pj2): #COMPARO EL PERSONAJE SACADO ANTERIORMENTE CON CADA UNO DE LOS OTROS
                print(f"El personaje {pj1} aparece en ambos episodios")
                
        while aux_stackpj2.size() > 0:

@@ -46,7 +46,7 @@ def verificarModelo(traje_stack):
         elemento = traje_stack.pop()
         aux_stack.push(elemento)
         if elemento.modelo == "Mark XLIV (Hulkbuster)":
-            print(f"El modelo {elemento.modelo} fue utilizado en la película: {elemento.pelicula}")
+            print(f"El modelo {elemento.modelo} fue utilizado en la película: \033[95m{elemento.pelicula}\033[0m")
             encontrado = True
             
     if encontrado==False:
@@ -65,11 +65,11 @@ def modelosDañados(traje_stack):
         elemento = traje_stack.pop()
         aux_stack.push(elemento)
         if elemento.estado == "Dañado":
-            print(f"El/Los modelos que quedaron dañados son: {elemento.modelo}")
+            print(f"\033[95m{elemento.modelo}\033[0m")
             encontrado = True
             
     if encontrado==False:
-        print("No hay modelos que quedaron dañados.")
+        print("Ninguno, no hay modelos que quedaron dañados.")
 
     # Restauro la pila original
     while aux_stack.size() > 0:
@@ -83,13 +83,13 @@ def eliminarModelosTrajes(traje_stack):
     while traje_stack.size() > 0:
         elemento = traje_stack.pop()
         if elemento.estado == "Destruido":
-            print(f"El/Los modelos de traje destruidos son: {elemento.modelo} de la pelicula: {elemento.pelicula}")
+            print(f"\033[95m{elemento.modelo}\033[0m de la pelicula: \033[95m{elemento.pelicula}\033[0m")
             encontrado = True
         else:
             aux_stack.push(elemento) #solamente guardo aquellos modelos que no esten destruidos
             
     if encontrado==False:
-        print("No hay modelos de traje destruidos: ")
+        print("Ninguno, no hay modelos de traje destruidos: ")
 
     # Restauro la pila con modelos que no estan destruidos
     while aux_stack.size() > 0:
@@ -129,35 +129,40 @@ def mostrarModelosEspecificos(traje_stack):
         elemento = traje_stack.pop()
         aux_stack.push(elemento)
         if elemento.pelicula == "Spider-Man: Homecoming" or elemento.pelicula == "Capitan America: Civil War":
-            print(f"El/Los nombres de los modelos de los trajes de la pelicula {elemento.pelicula} son: {elemento.modelo}")
+            print(f"\033[95m{elemento.modelo}\033[0m")
             encontrado = True
             
     if encontrado==False:
-        print("No se encontro peliculas Spider-Man: Homecoming y Capitan America: Civil War.")
+        print("Ninguno, ya que no se encontro peliculas Spider-Man: Homecoming y Capitan America: Civil War.")
 
     # Restauro la pila original
     while aux_stack.size() > 0:
         traje_stack.push(aux_stack.pop())
 
     
-
-        
+#CUERPO PRINCIPAL 
 cargarPila(trajes_stack,trajes)
-print("Trajes en la pila original:")
-trajes_stack.show()
+# print("Trajes en la pila original:")
+# trajes_stack.show()
 print()
+print("\033[92mModelos de Mark XLIV (Hulkbuster) que fueron utilizados en alguna de las películas:\033[0m")
 verificarModelo(trajes_stack)
 print()
+print("\033[92mLos modelos que quedaron dañados fueron:\033[0m")
 modelosDañados(trajes_stack)
 print()
+print("\033[92mLos modelos que quedaron destruidos fueron:\033[0m")
 eliminarModelosTrajes(trajes_stack)
 print()
-print("Trajes en la pila despues de excluir los modelos destruidos: ")
+print("\033[92mTrajes en la pila despues de excluir los modelos destruidos:\033[0m")
 trajes_stack.show()
 print()
 agregarModelo(trajes_stack)
 print()
-print("Trajes en la pila despues de agregar el nuevo modelo Mark LXXXV: ")
+print("\033[92mTrajes en la pila despues de agregar el nuevo modelo Mark LXXXV:\033[0m")
 trajes_stack.show()
 print()
+print("\033[92mTrajes utilizados en las películas Spider-Man: Homecoming y Capitan America: Civil War\033[0m")
 mostrarModelosEspecificos(trajes_stack)
+print()
+print("\033[96mTrabajo realizado por: \033[34mAxel Sandillú\033[0m")
