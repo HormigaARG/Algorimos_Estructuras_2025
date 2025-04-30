@@ -13,7 +13,7 @@ def ordenarPilaCreciente(num_queue):
     aux_queue = Queue()
     
     while num_queue.size() > 0:
-        minimo = num_queue.attention()
+        minimo = num_queue.on_front()
     
     # Recorremos la cola original para encontrar el mínimo
     for i in range(num_queue.size() - 1):
