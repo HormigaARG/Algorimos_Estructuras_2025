@@ -46,24 +46,20 @@ def eliminarNodo(list_SH):
     list_SH.delete_value("Linterna Verde", key_value="nombre")
     
 def buscarAñoAparicion(list_SH):
-    encontrado=False
-    for heroe in list_SH:
-        if heroe.nombre == "Wolverine":
-            encontrado=True
-            print(f"Año de aparición de Wolverine: {heroe.año}")
-            
-    if encontrado==False:
+    indice=list_SH.search("Wolverine","nombre")
+    if indice:
+        añoAparicion=list_superheroes[indice].año
+        print(f"El año de aparicion de Wolwerine es: {añoAparicion}")
+    else:
         print("Wolverine no a sido encontrado.")
         
 def cambiarCasa(list_SH):
-    encontrado=False
-    for heroe in list_SH:
-        if heroe.nombre=="Dr. Strange":
-            encontrado=True
-            heroe.casaComic="Marvel"
-    
-    if encontrado==False:
+    indice=list_SH.search("Dr. Strange", "nombre")
+    if indice:
+        list_SH[indice].casaComic="Marvel"
+    else:
         print("No se encontro a el superheroe Dr. Strange.")
+    
 
 def mostrarNombre(list_SH):
     for heroe in list_SH: #ACA SI ES NECESARIO HACER UN RECORRIDO ENTRE SUPERHEROES
@@ -77,25 +73,27 @@ def mostrarNombreCasa(list_SH):
             print(f"{heroe.nombre}, {heroe.casaComic}")
 
 def mostrarCasa(list_SH):
-    encontrado=False
-    for heroe in list_SH:
-        if heroe.nombre=="Capitana Marvel" or heroe.nombre=="Mujer Maravilla":
-            encontrado=True
-            print(f"{heroe.nombre}: {heroe.casaComic}")
-            
-    if encontrado==False:
+    indice1=list_SH.search("Capitana Marvel", "nombre")
+    indice2=list_SH.search("Mujer Maravilla", "nombre")
+    
+    if indice1 or indice2:
+        print(f"{list_SH[indice1].nombre}: {list_SH[indice1].casaComic}")
+        print(f"{list_SH[indice2].nombre}: {list_SH[indice2].casaComic}")
+    else:
         print("No se encontraron las Superheroes Capitana Marvel o Mujer Maravilla.")
+            
         
 def mostrarInformacion(list_SH):
-    encontrado=False
-    for heroe in list_SH:
-        if heroe.nombre=="Flash" or heroe.nombre=="Star-Lord":
-            encontrado=True
-            print(f"{heroe.nombre}, {heroe.año}, {heroe.casaComic}, {heroe.biografia}")
-            
-    if encontrado==False:
+    indice1=list_SH.search("Flash", "nombre")
+    indice2=list_SH.search("Star-Lord", "nombre")
+    
+    if indice1 or indice2:
+        print(f"{list_SH[indice1].nombre}, {list_SH[indice1].año}, {list_SH[indice1].casaComic}, {list_SH[indice1].biografia}")
+        print(f"{list_SH[indice2].nombre}, {list_SH[indice2].año}, {list_SH[indice2].casaComic}, {list_SH[indice2].biografia}")
+    else:
         print("No se encontraron los personajes Flash y Star-Lord. ")
-      
+            
+        
 def listarSuperheroes(list_SH):
     for heroe in list_SH: 
         if heroe.nombre.startswith(("B","M","S")):
@@ -113,9 +111,6 @@ def contadorSuperheroesCasas(list_SH):
     for casa in conteo:
         print("Casa:", casa, ", Cantidad de héroes:", conteo[casa])
 
-    
-    
-    
     
 # CUERPO PRINCIPAL
 cargarSuperheroes(list_superheroes, super_heroe)
