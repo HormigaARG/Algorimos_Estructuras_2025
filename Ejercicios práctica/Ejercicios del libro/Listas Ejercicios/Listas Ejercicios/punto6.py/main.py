@@ -66,13 +66,13 @@ def cambiarCasa(list_SH):
         print("No se encontro a el superheroe Dr. Strange.")
 
 def mostrarNombre(list_SH):
-    for heroe in list_SH:
+    for heroe in list_SH: #ACA SI ES NECESARIO HACER UN RECORRIDO ENTRE SUPERHEROES
         biografia = heroe.biografia
         if ("traje" in biografia) or ("armadura" in biografia):
             print(heroe.nombre)
         
 def mostrarNombreCasa(list_SH):
-    for heroe in list_SH:
+    for heroe in list_SH: #ACA SI ES NECESARIO HACER UN RECORRIDO ENTRE SUPERHEROES
         if heroe.año<1963:
             print(f"{heroe.nombre}, {heroe.casaComic}")
 
@@ -98,7 +98,7 @@ def mostrarInformacion(list_SH):
       
 def listarSuperheroes(list_SH):
     for heroe in list_SH: 
-        if heroe.nombre[0] in "BMS":
+        if heroe.nombre.startswith(("B","M","S")):
             print(f"{heroe.nombre}")
         
 def contadorSuperheroesCasas(list_SH):
