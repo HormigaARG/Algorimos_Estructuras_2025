@@ -103,7 +103,7 @@ def obtenerSoloPalabra(list_song):
 
     for cancion in list_song:
         artista = cancion.banda_artista
-        palabras = artista.split()
+        palabras = artista.split() #sirve para dividir la cadena en una lista de palabras (para detectar nombres de artistas que solo tienen una palabra.)
 
         if len(palabras) == 1 and (artista not in nombres_mostrados):
             print(artista)

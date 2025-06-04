@@ -16,7 +16,7 @@ class Parcial:
         self.materia = materia
         self.nota = nota
         self.fecha = fecha
-        self.legajo = legajo 
+        self.legajo = legajo #atributo compartido para saber que parcial le corresponde a cada alumno
     
     def __str__(self):
         return f"Materia: {self.materia}, Nota: {self.nota}, Fecha: {self.fecha}"
