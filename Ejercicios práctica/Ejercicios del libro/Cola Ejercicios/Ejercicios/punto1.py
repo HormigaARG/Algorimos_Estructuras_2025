@@ -10,8 +10,6 @@ def cargar_cola(letter_queue):
     for i in range(15):
         letter_queue.arrive(chr(randint(65, 90)))
 
-
-
 def eliminarVocalesCola(letter_queue):
     for i in range(letter_queue.size()):
         if letter_queue.on_front() in ["A", "E", "I", "O", "U"]:
