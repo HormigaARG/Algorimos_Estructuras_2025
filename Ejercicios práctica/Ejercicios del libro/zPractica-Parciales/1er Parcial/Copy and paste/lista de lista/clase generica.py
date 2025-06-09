@@ -18,10 +18,10 @@ class Pokemon:
         self.nivel = nivel
         self.tipo = tipo
         self.subtipo = subtipo
-        self.nombreEntrenador = nombreEntrenador 
+        self.nombreEntrenador = nombreEntrenador #atributo compartido para saber a que le corresponde a cada uno
     
     def __str__(self):
-        return f"Nombre: {self.nombre}, Nivel: {self.nivel}, Tipo: {self.tipo}, SubTipo: {self.subtipo}, Entrenador: {self.nombreEntrenador}"
+        return f"Nombre: {self.nombre}, Nivel: {self.nivel}, Tipo: {self.tipo}, SubTipo: {self.subtipo}"
     
 def order_by_nombre(entrenador):
     return entrenador.nombre

@@ -100,7 +100,7 @@ def mostrarEstaciones(list_est):
 #CP
 cargarEstaciones(list_estaciones, estaciones)
 cargarMediciones(list_estaciones, mediciones)
-# list_estaciones.show_list_of_list()
+#list_estaciones.show_list_of_list()
 promedioTempHum(list_estaciones)
 print()
 print("Ubicación de las estaciones meteorológicas en las que en el día actual está lloviendo o nevando: ")
