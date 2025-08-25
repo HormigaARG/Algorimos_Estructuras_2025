@@ -10,3 +10,4 @@ class Personaje:
     def __str__(self):
         return f'{self.nombre} ({self.nombre_real}) - Año: {self.año_aparicion} - {"Villano" if self.es_villano else "Héroe"}'
     
+    
