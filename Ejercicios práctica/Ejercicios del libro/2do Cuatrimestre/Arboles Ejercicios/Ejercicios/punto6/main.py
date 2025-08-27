@@ -42,11 +42,16 @@ def generarBosque(arbol_general):
 #MAIN
 cargar_personajes(arbol_personajes, personajes)
 arbol_nombre, arbol_ranking, arbol_especie = generarBosque(arbol_personajes)
-# b. realizar un barrido inorden del árbol por nombre y ranking;
+#B. realizar un barrido inorden del árbol por nombre y ranking;
 print()
 print("Barrido (IN-ORDEN) del arbol por nombre: ")
 arbol_nombre.in_order()
 print("Barrido (IN-ORDEN) del arbol por ranking: ")
 arbol_ranking.in_order()
 print()
+#C. realizar un barrido por nivel de los árboles por ranking y especie;
+print("Barrido (BY-LEVEL) del arbol por ranking: ")
+arbol_ranking.by_level()
+print("Barrido (BY-LEVEL) del arbol por especie: ")
+arbol_especie.by_level()
 
