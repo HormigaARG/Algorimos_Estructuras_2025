@@ -123,17 +123,6 @@ class BinaryTree:
         return delete_value, delete_other_values
     
 
-    def villain_in_order(self):
-        def __villain_in_order(root):
-            if root is not None:
-                __villain_in_order(root.left)
-                if root.other_values["is_villain"] is True:
-                    print(root.value)
-                __villain_in_order(root.right)
-
-        if self.root is not None:
-            __villain_in_order(self.root)
-
 
 # arbol = BinaryTree()
 

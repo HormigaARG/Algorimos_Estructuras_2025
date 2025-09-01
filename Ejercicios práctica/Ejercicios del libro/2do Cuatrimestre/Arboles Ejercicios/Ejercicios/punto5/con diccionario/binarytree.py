@@ -27,7 +27,7 @@ class BinaryTree:
 
         self.root = __insert(self.root, value, other_values)
 
-    def pre_order(self):
+    def pre_order(self): #muestra como estan
         def __pre_order(root):
             if root is not None:
                 print(root.value)

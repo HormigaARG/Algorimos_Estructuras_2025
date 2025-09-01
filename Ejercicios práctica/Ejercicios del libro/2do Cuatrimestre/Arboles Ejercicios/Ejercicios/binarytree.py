@@ -27,7 +27,7 @@ class BinaryTree:
 
         self.root = __insert(self.root, value, other_values)
 
-    def pre_order(self):
+    def pre_order(self): #muestra como estan
         def __pre_order(root):
             if root is not None:
                 print(root.value, root.other_values)
@@ -37,7 +37,7 @@ class BinaryTree:
         if self.root is not None:
             __pre_order(self.root)
 
-    def in_order(self):
+    def in_order(self): #ordena de manera ascendente
         def __in_order(root):
             if root is not None:
                 __in_order(root.left)
@@ -47,7 +47,7 @@ class BinaryTree:
         if self.root is not None:
             __in_order(self.root)
 
-    def post_order(self):
+    def post_order(self): #ordena de manera descendiente
         def __post_order(root):
             if root is not None:
                 __post_order(root.right)
@@ -121,17 +121,6 @@ class BinaryTree:
                     tree_queue.arrive(node.left)
                 if node.right is not None:
                     tree_queue.arrive(node.right)
-
-    def villain_in_order(self):
-        def __villain_in_order(root):
-            if root is not None:
-                __villain_in_order(root.left)
-                if root.other_values["is_villain"] is True:
-                    print(root.value)
-                __villain_in_order(root.right)
-
-        if self.root is not None:
-            __villain_in_order(self.root)
 
 
 # arbol = BinaryTree()
