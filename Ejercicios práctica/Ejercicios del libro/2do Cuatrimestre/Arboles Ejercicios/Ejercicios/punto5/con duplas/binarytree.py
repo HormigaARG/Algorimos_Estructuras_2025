@@ -8,39 +8,41 @@ class BinaryTree:
         def __init__(self, value: Any, other_values: Optional[Any] = None):
             self.value = value
             self.other_values = other_values
-            self.left = None
-            self.right = None
-            self.altura = 0
+            self.left = None #inicializo enlaces a hijos (hijo izq)
+            self.right = None #inicializo enlaces a hijos (hijo der)
+            self.hight = 0
 
     def __init__(self):
-        self.root = None
+        self.root = None #inicializo arbol queda en vacio (creo la raiz)
 
     def insert(self, value: Any, other_values: Optional[Any] = None):
-        def __insert(root, value, other_values):
-            if root is None:
+        def __insert(root, value, other_values): #funcion recursiva
+            if root is None: #caso base
                 return BinaryTree.__nodeTree(value, other_values)
             elif value < root.value:
                 root.left = __insert(root.left, value, other_values)
             else:
                 root.right = __insert(root.right, value, other_values)
 
-            self.update_altura(root)
-
+            root = self.auto_balance(root)
+            self.update_hight(root)
+            #el nodo actual (root) se devuelve para que se pueda conectar al nodo padre de la llamada anterior.
             return root
 
-        self.root = __insert(self.root, value, other_values)
+        #garantiza que, después de insertar un nuevo valor, la variable self.root siempre apunte a la raíz actualizada del árbol.
+        self.root = __insert(self.root, value, other_values) #esto es fundamental porque en la primera inserción crea la raíz, y en las siguientes mantiene enlazado todo el árbol correctamente.
 
-    def pre_order(self):
+    def pre_order(self): #muestra como estan
         def __pre_order(root):
             if root is not None:
-                print(root.value, root.other_values, root.altura)
+                print(root.value, root.other_values, root.hight)
                 __pre_order(root.left)
                 __pre_order(root.right)
 
         if self.root is not None:
             __pre_order(self.root)
 
-    def in_order(self):
+    def in_order(self): #ordena de manera ascendente
         def __in_order(root):
             if root is not None:
                 __in_order(root.left)
@@ -50,7 +52,7 @@ class BinaryTree:
         if self.root is not None:
             __in_order(self.root)
 
-    def post_order(self):
+    def post_order(self): #ordena de manera descendiente
         def __post_order(root):
             if root is not None:
                 __post_order(root.right)
@@ -117,10 +119,9 @@ class BinaryTree:
                         root.left, replace_node = __replace(root.left)
                         root.value = replace_node.value
                         root.other_values = replace_node.other_values
-                        
-            # Recalculo la altura en la vuelta de la recursión
-            self.update_altura(root)
-
+                
+                root = self.auto_balance(root) # Recalculo el balanceo
+                self.update_hight(root) # Recalculo la altura en la vuelta de la recursión
             return root, delete_value, deleter_other_values
 
         delete_value =  None
@@ -143,76 +144,57 @@ class BinaryTree:
                 if node.right is not None:
                     tree_queue.arrive(node.right)
 
-    def altura(self, root):
+    def hight(self, root):
         if root is None:
             return -1
         else:
-            return root.altura
+            return root.hight
 
-    def update_altura(self, root):
+    def update_hight(self, root):
         if root is not None:
-            alt_left = self.altura(root.left)
-            alt_right = self.altura(root.right)
-            root.altura = max(alt_left, alt_right) + 1
+            alt_left = self.hight(root.left)
+            alt_right = self.hight(root.right)
+            root.hight = max(alt_left, alt_right) + 1
 
+    def simple_rotation(self, root, control):
+        if control: # RS Right
+            aux = root.left
+            root.left = aux.right
+            aux.right = root
+        else: # RS Left
+            aux = root.right
+            root.right = aux.left
+            aux.left = root
 
-# arbol = BinaryTree()
-# arbol_heroes = BinaryTree()
-# arbol_villanos = BinaryTree()
+        self.update_hight(root)
+        self.update_hight(aux)
+        root = aux
+        return root
 
+    def double_rotation(self, root, control):
+        if control: # RD Right
+            root.left = self.simple_rotation(root.left, False)
+            root = self.simple_rotation(root, True)
+        else:
+            root.right = self.simple_rotation(root.right, True)
+            root = self.simple_rotation(root, False)
+        
+        return root
 
-
-
-# print()
-# arbol.update_altura(arbol.root.left.left)
-# print()
-# arbol.update_altura(arbol.root.left)
-# print()
-# arbol.update_altura(arbol.root)
-# print()
-# arbol.pre_order()
-
-#  arbol.insert(11)
-
-# # pos = arbol.search(19)
-# # print(pos)
-# arbol.in_order()
-
-# from super_heroes_data import superheroes
-
-# for super_hero in superheroes:
-#     arbol.insert(super_hero['name'], super_hero)
-
-
-# arbol.divide_tree(arbol_heroes, arbol_villanos)
-
-# bosque = [arbol_heroes, arbol_villanos]
-
-# for tree in bosque:
-#     tree.in_order()
-#     print()
-
-# arbol.proximity_search('Dr')
-# name = input('ingrese nombre para modificar: ')
-# value, other_value = arbol.delete(name)
-
-# if value is not None:
-#     fix_name = input('ingrese el nuevo nombre: ')
-#     other_value['name'] = fix_name
-#     arbol.insert(fix_name, other_value) 
-
-# print()
-# arbol.proximity_search('Dr')
-# print()
-# pos = arbol.search('Dr Strange')
-# if pos is not None:
-#     print(pos.value, pos.other_values)
-
-# print(arbol.count_heroes())
-
-# arbol.villain_in_order()
-
-# print()
-# pos = arbol.search("Thanos")
-# if pos is not None:
-#     print(pos.value, pos.other_values)
+    def auto_balance(self, root):
+        if root is not None:
+            if self.hight(root.left) - self.hight(root.right) == 2:
+                if self.hight(root.left.left) >= self.hight(root.left.right):
+                    # print("RS RIGHT")
+                    root = self.simple_rotation(root, True)
+                else:
+                    # print("RD RIGHT")
+                    root = self.double_rotation(root, True)
+            if self.hight(root.right) - self.hight(root.left) == 2:
+                if self.hight(root.right.right) >= self.hight(root.right.left):
+                    # print("RS LEFT")
+                    root = self.simple_rotation(root, False)
+                else:
+                    # print("RD LEFT")
+                    root = self.double_rotation(root, False)
+        return root

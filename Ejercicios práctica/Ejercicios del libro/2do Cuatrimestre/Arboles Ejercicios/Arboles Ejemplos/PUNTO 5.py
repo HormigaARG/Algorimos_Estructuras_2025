@@ -1,5 +1,5 @@
 from personajesData import Personaje, personajesMCU
-from Binarytree import BinaryTree
+from binarytree import BinaryTree
 
 arbol = BinaryTree()
 

@@ -155,47 +155,6 @@ class BinaryTree:
             alt_right = self.altura(root.right)
             root.altura = max(alt_left, alt_right) + 1
 
-    def villain_in_order(self):
-        def __villain_in_order(root):
-            if root is not None:
-                __villain_in_order(root.left)
-                if root.other_values["is_villain"] is True:
-                    print(root.value)
-                __villain_in_order(root.right)
-
-        if self.root is not None:
-            __villain_in_order(self.root)
-
-    def count_heroes(self):
-        def __count_heroes(root):
-            count = 0
-            if root is not None:
-                if root.other_values["is_villain"] is False:
-                    count += 1
-                count += __count_heroes(root.left)
-                count += __count_heroes(root.right)
-
-            return count
-
-        total = 0
-        if self.root is not None:
-            total = __count_heroes(self.root)
-        
-        return total
-    
-    def divide_tree(self, arbol_h, arbol_v):
-        def __divide_tree(root, arbol_h, arbol_v):
-            if root is not None:
-                if root.other_values["is_villain"] is False:
-                    arbol_h.insert(root.value, root.other_values)
-                else:
-                    arbol_v.insert(root.value, root.other_values)
-                __divide_tree(root.left, arbol_h, arbol_v)
-                __divide_tree(root.right, arbol_h, arbol_v)
-
-
-        __divide_tree(self.root, arbol_h, arbol_v)
-
 # arbol = BinaryTree()
 # arbol_heroes = BinaryTree()
 # arbol_villanos = BinaryTree()

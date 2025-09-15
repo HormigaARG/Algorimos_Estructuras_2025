@@ -102,8 +102,8 @@ print()
 print("Determinar la altura del subárbol izquierdo y del subárbol derecho. PD: -1 solo significa que no hay nodo.")  
 subarbol_izquierdo = arbol_numeros.root.left
 subarbol_derecho = arbol_numeros.root.right
-print(f"Altura del subárbol izquierdo: {arbol_numeros.altura(subarbol_izquierdo)}")
-print(f"Altura del subárbol derecho: {arbol_numeros.altura(subarbol_derecho)}")
+print(f"Altura del subárbol izquierdo: {arbol_numeros.hight(subarbol_izquierdo)}")
+print(f"Altura del subárbol derecho: {arbol_numeros.hight(subarbol_derecho)}")
 print()
 cantidad_ocurrencias = determinar_ocurrencia(arbol_numeros, 8)
 print(f"El número 8 aparece {cantidad_ocurrencias} vez/veces en el árbol.")

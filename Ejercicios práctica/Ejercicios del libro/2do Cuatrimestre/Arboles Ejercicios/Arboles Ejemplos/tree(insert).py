@@ -7,7 +7,7 @@ class Tree:
         def __init__(self, value: Any):
             self.value = value
             self.left = None #inicializo enlaces a hijos
-            self.right = None #
+            self.right = None 
 
     def __init__(self): #inicializo arbol queda en vacio (creo la raiz)
         self.root = None
@@ -29,7 +29,7 @@ class Tree:
             return root 
 
         #garantiza que, después de insertar un nuevo valor, la variable self.root siempre apunte a la raíz actualizada del árbol.
-        self.root = __insert(self.root, value) #Esto es fundamental porque en la primera inserción crea la raíz, y en las siguientes mantiene enlazado todo el árbol correctamente.
+        self.root = __insert(self.root, value) #esto es fundamental porque en la primera inserción crea la raíz, y en las siguientes mantiene enlazado todo el árbol correctamente.
 
 
 arbol = Tree()

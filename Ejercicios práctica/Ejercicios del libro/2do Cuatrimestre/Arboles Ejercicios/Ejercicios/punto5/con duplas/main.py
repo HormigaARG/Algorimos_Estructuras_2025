@@ -50,7 +50,7 @@ def mostrar_superheroes_C(arbol):
 #     else:
 #         return 0
 
-def cantidad_SH(self):
+def cantidad_SH(arbol):
     def __contarNodosArbol(nodo):
         cantidad = 0
         if nodo is not None:
@@ -62,8 +62,8 @@ def cantidad_SH(self):
         return cantidad
 
     total = 0
-    if self.root is not None:
-        total = __contarNodosArbol(self.root)
+    if arbol.root is not None:
+        total = __contarNodosArbol(arbol.root)
     
     return total
         
@@ -128,7 +128,7 @@ def generarBosque(arbol, arbol_SH, arbol_VI):
     
 #     return inOrder(arbol.root)
 
-def contarNodosArbol(self):
+def contarNodosArbol(arbol):
     def __contarNodosArbol(nodo):
         cantidad = 0
         if nodo is not None:
@@ -139,8 +139,8 @@ def contarNodosArbol(self):
         return cantidad
 
     total = 0
-    if self.root is not None:
-        total = __contarNodosArbol(self.root)
+    if arbol.root is not None:
+        total = __contarNodosArbol(arbol.root)
     
     return total
         
