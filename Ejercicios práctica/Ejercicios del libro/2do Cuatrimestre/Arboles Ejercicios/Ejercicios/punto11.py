@@ -50,7 +50,7 @@ def mostrar_info_hojas(arbol):
         if nodo is None:
             return
         
-        # Si no tiene hijos, es una hoja. Imprime su valor.
+        # Si no tiene hijos, es una hoja.
         if nodo.left is None and nodo.right is None: 
             print(nodo.value)
         else:

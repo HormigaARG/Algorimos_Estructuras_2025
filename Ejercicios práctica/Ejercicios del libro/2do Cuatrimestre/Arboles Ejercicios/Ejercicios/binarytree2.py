@@ -24,8 +24,8 @@ class BinaryTree:
             else:
                 root.right = __insert(root.right, value, other_values)
 
-            root = self.auto_balance(root)
-            self.update_hight(root)
+            # root = self.auto_balance(root)
+            # self.update_hight(root)
             #el nodo actual (root) se devuelve para que se pueda conectar al nodo padre de la llamada anterior.
             return root
 
@@ -114,14 +114,14 @@ class BinaryTree:
                     if root.left is None:
                         root = root.right
                     elif root.right is None:
-                        root = root.left
+                        root.right = root.left
                     else:
                         root.left, replace_node = __replace(root.left)
                         root.value = replace_node.value
                         root.other_values = replace_node.other_values
                 
-                root = self.auto_balance(root) # Recalculo el balanceo
-                self.update_hight(root) # Recalculo la altura en la vuelta de la recursión
+                # root = self.auto_balance(root) # Recalculo el balanceo
+                # self.update_hight(root) # Recalculo la altura en la vuelta de la recursión
             return root, delete_value, deleter_other_values
 
         delete_value =  None
@@ -181,20 +181,20 @@ class BinaryTree:
         
         return root
 
-    def auto_balance(self, root):
-        if root is not None:
-            if self.hight(root.left) - self.hight(root.right) == 2:
-                if self.hight(root.left.left) >= self.hight(root.left.right):
-                    # print("RS RIGHT")
-                    root = self.simple_rotation(root, True)
-                else:
-                    # print("RD RIGHT")
-                    root = self.double_rotation(root, True)
-            if self.hight(root.right) - self.hight(root.left) == 2:
-                if self.hight(root.right.right) >= self.hight(root.right.left):
-                    # print("RS LEFT")
-                    root = self.simple_rotation(root, False)
-                else:
-                    # print("RD LEFT")
-                    root = self.double_rotation(root, False)
-        return root
+    # def auto_balance(self, root):
+    #     if root is not None:
+    #         if self.hight(root.left) - self.hight(root.right) == 2:
+    #             if self.hight(root.left.left) >= self.hight(root.left.right):
+    #                 # print("RS RIGHT")
+    #                 root = self.simple_rotation(root, True)
+    #             else:
+    #                 # print("RD RIGHT")
+    #                 root = self.double_rotation(root, True)
+    #         if self.hight(root.right) - self.hight(root.left) == 2:
+    #             if self.hight(root.right.right) >= self.hight(root.right.left):
+    #                 # print("RS LEFT")
+    #                 root = self.simple_rotation(root, False)
+    #             else:
+    #                 # print("RD LEFT")
+    #                 root = self.double_rotation(root, False)
+    #     return root

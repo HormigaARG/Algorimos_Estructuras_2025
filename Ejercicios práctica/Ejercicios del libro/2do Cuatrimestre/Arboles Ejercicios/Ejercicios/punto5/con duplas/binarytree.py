@@ -32,7 +32,7 @@ class BinaryTree:
         #garantiza que, después de insertar un nuevo valor, la variable self.root siempre apunte a la raíz actualizada del árbol.
         self.root = __insert(self.root, value, other_values) #esto es fundamental porque en la primera inserción crea la raíz, y en las siguientes mantiene enlazado todo el árbol correctamente.
 
-    def pre_order(self): #muestra como estan
+    def pre_order(self): #muestra como estan insertados
         def __pre_order(root):
             if root is not None:
                 print(root.value, root.other_values, root.hight)

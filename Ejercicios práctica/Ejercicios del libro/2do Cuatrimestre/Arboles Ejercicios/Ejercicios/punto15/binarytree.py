@@ -35,7 +35,7 @@ class BinaryTree:
     def pre_order(self): #muestra como estan
         def __pre_order(root):
             if root is not None:
-                print(root.value, root.other_values, root.hight)
+                print(root.value, root.other_values)
                 __pre_order(root.left)
                 __pre_order(root.right)
 
