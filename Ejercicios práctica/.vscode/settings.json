@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./Ejercicios del libro/2do Cuatrimestre/Arboles Ejercicios/Ejercicios/punto17"
+    ]
+}
