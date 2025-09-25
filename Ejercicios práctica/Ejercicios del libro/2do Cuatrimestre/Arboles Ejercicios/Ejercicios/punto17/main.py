@@ -24,8 +24,8 @@ def cargar_pokemons(arbol_nom, arbol_num,arbol_tip, pokemons):
 # b. mostrar todos los datos de un Pokémon a partir de su número y nombre –para este último,
 # la búsqueda debe ser por proximidad, es decir si busco “bul” se deben mostrar todos los
 # Pokémons cuyos nombres comiencen o contengan dichos caracteres–;
-def buscar_pokemon_numero(numero):
-    nodo = arbol_numero.search(numero)
+def buscar_pokemon_numero(arbol,numero):
+    nodo = arbol.search(numero)
     if nodo:
         print("Se encontro el pokemon numero 25!, aqui sus datos: ")
         print(nodo.other_values)
@@ -106,7 +106,7 @@ print()
 print("Arbol por nivel de Nombre: ")
 arbol_tipo.by_level()
 print()
-buscar_pokemon_numero(25) #le pongo un numero yo nomas
+buscar_pokemon_numero(arbol_numero,25) #le pongo un numero yo nomas
 print()
 buscar_pokemon_nombre(arbol_nombre,"Bul") #le pongo un nombre yo nomas
 print()
