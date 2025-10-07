@@ -1,8 +1,6 @@
 # 23. Implementar un algoritmo que permita generar un árbol con los datos de la siguiente tabla y
 # resuelva las siguientes consultas:
 
-# d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
-
 # g. además cada nodo debe tener un campo “capturada” que almacenará el nombre del héroe
 # o dios que la capturo;
 
@@ -33,6 +31,29 @@ def mostrar_info(arbol):
         print(f"- {personaje}")
     else:
         print("Talos no se encontró en el árbol.") 
+        
+
+# d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
+def ranking(arbol, ranking_result):
+    def __ranking(node, ranking_result):
+        if node is not None:
+            __ranking(node.left, ranking_result)
+            criatura = node.other_values
+            if criatura.derrotado_por is not None:
+                heroe = criatura.derrotado_por
+                if heroe not in ranking_result:
+                    ranking_result[heroe] = 1
+                else:
+                    ranking_result[heroe] += 1
+            __ranking(node.right, ranking_result)
+
+    if arbol.root is not None:
+        __ranking(arbol.root, ranking_result)
+
+        
+# Ordenar el ranking de mayor a menor cantidad (sirve para el d)
+def ordenar_ranking(item):
+    return item[1]
 
 # e. listar las criaturas derrotadas por Heracles;
 def mostrar_criaturas(arbol):
@@ -151,6 +172,13 @@ cargar_descripcion(arbol_criaturas, "Esfinge", "Criatura con cuerpo de Leon") #e
 print()
 print("Toda la informacion de la criatura Talos: ")
 mostrar_info(arbol_criaturas)
+print()
+print("Los 3 héroes o dioses que derrotaron mayor cantidad de criaturas son:")
+ranking_result = {}
+ranking(arbol_criaturas, ranking_result)
+list_ranking = list(ranking_result.items())
+list_ranking.sort(key=ordenar_ranking, reverse=True)
+print(list_ranking[:3])
 print()
 print("Criaturas derrotadas por Heracles: ")
 mostrar_criaturas(arbol_criaturas)

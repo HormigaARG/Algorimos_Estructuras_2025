@@ -39,5 +39,5 @@ criaturas = [
     Criatura("Basilisco", derrotado_por=None, descripcion="Una criatura mítica, a menudo un reptil, con un aliento o mirada letal.", capturada=None),
     Criatura("Jabalí de Erimanto", derrotado_por=None, descripcion="Un jabalí salvaje que aterrorizaba una región del Peloponeso.", capturada=None),
     Criatura("Dragón de la Cólquida", derrotado_por=None, descripcion="Un dragón que custodiaba el Vellocino de Oro en la Cólquide.", capturada=None),
-    Criatura("Cerbero", derrotado_por=None, descripcion="El perro de tres cabezas que guardaba la entrada al inframundo.", capturada=None)
+    Criatura("Cerbero", derrotado_por="Hermes", descripcion="El perro de tres cabezas que guardaba la entrada al inframundo.", capturada=None)
 ]
