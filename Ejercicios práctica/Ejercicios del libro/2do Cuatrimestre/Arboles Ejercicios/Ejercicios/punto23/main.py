@@ -98,7 +98,12 @@ def mostrar_nodos(arbol):
 # i. se debe permitir búsquedas por coincidencia;
 def busqueda_por_coincidencia(arbol, cadena):
     print(f"Búsqueda por coincidencia para '{cadena}':")
-    arbol.proximity_search(cadena)
+    nodo = arbol.search(cadena)
+    if nodo is not None:
+        print(nodo.other_values)
+    else:
+        print("No se encontró ninguna coincidencia.")
+
      
 # j. eliminar al Basilisco y a las Sirenas;
 def eliminar_criaturas(arbol, criatura):
@@ -188,6 +193,8 @@ mostrar_criaturas_no_derrotadas(arbol_criaturas)
 print()
 print("Criaturas Cerbero, Toro de Creta, Cierva Cerinea y Jabalí de Erimanto cambiando a atrapados por Heracles: ")
 mostrar_nodos(arbol_criaturas)
+print()
+busqueda_por_coincidencia(arbol_criaturas,"Talos") #elijo manualmente
 print()
 eliminar_criaturas(arbol_criaturas,"Basilisco")
 eliminar_criaturas(arbol_criaturas, "Sirenas")
