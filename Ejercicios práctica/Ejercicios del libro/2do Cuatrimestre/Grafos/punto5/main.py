@@ -5,6 +5,7 @@
 
 from graph import Graph
 from tarea import Tarea
+import math
 
 red = Graph(is_directed=False)
 
@@ -73,152 +74,121 @@ def barridos_desde_notebooks(red):
 
 # c. encontrar el camino más corto para enviar a imprimir un documento desde la pc: Manjaro,
 # Red Hat, Fedora hasta la impresora;
-def camino_corto_a_impresora(red):
-    equipos = ["Manjaro", "Red Hat", "Fedora"]
-    destino = "Impresora"
+                  
+def camino_corto_a_impresora(grafo):
+
+    pcs = ["Manjaro", "Red Hat", "Fedora"]    
+    resultados = {}   
     
-    print(f"CAMINO MÁS CORTO A IMPRESORA: ")
-    
-    for equipo in equipos:
-        print(f"Desde {equipo} a Impresora")
-        
-        # Obtener el camino más corto usando Dijkstra
-        path = red.dijkstra(equipo)
-        
-        # Reconstruir camino específico a Impresora
+    for pc in pcs:
+        path = grafo.dijkstra(pc) #todos los caminos mas cortos a pc
+        destination = 'Impresora'
         peso_total = None
         camino_completo = []
         
-        # Volcar a una lista temporal
-        temp_stack = []
-        while path.size() > 0:
-            temp_stack.append(path.pop())
-        
-        # Buscar el destino en los resultados
-        for value in temp_stack:
-            if value[0] == destino:
+        while path.size() > 0: #mientras que el path tenga algo, hace un pop al value
+            value = path.pop()
+            if value[0] == destination: #chequea hasta que sea la impresora
                 if peso_total is None:
-                    peso_total = value[1]
-                camino_completo.append(value[0])
-                # Reconstruir camino hacia atrás
-                current = value[2]
-                while current is not None:
-                    camino_completo.insert(0, current)
-                    found = False
-                    for v in temp_stack:
-                        if v[0] == current:
-                            current = v[2]
-                            found = True
-                            break
-                    if not found:
-                        break
-                break
+                    peso_total = value[1] #añade el peso
+                camino_completo.append(value[0]) #añade la impresora al camino
+                destination = value[2] #añade el predecesor de la impresora y vuelve a hacer esto
         
-        if camino_completo:
-            print(f"Camino: {' -> '.join(camino_completo)}")
-            print(f"Costo total: {peso_total}")
-        else:
-            print("No se encontró camino")
+        camino_completo.reverse() #Lo inverte para que sea de pc a impresora
+
+        resultados[pc] = { #Aca construye el camino
+            "camino": camino_completo,
+            "distancia": peso_total if peso_total is not None and peso_total != math.inf else math.inf
+        }
+    
+    return resultados
 
 
 # d. encontrar el árbol de expansión mínima;
-def arbol_expansion_minima(red):
-    expansion_tree = red.kruskal("Router1")
-    
-    print("Árbol de Expansión Mínima del Router 1:")
-    aristas = expansion_tree.split(';')
+def arbol_expansion_minima(red, vertice):
+    expansion_tree = red.kruskal(vertice)
+
     peso_total = 0
-    
-    for arista in aristas:
-        origen, destino, peso = arista.split('-')
-        peso_num = int(peso)
-        peso_total += peso_num
-        print(f"  {origen} -- {destino} (peso: {peso})")
-    
-    print(f"Peso total del árbol: {peso_total}")
+    for edge in expansion_tree.split(';'):
+        origin, destination, weight = edge.split('-')
+        print(f"Origin: {origin} - Destination: {destination}")
+        peso_total += int(weight)
+    print(f"Peso total: {peso_total}")
 
 # e. determinar desde que pc (no notebook) es el camino más corto hasta el servidor “Guaraní”;
-def camino_corto_pc_a_guarani(red):
-    pcs = ["Manjaro", "Fedora", "Ubuntu", "Mint", "Parrot"]
-    destino = "Guarani"
-    
-    mejor_pc = None
-    mejor_costo = float('inf')
-    mejor_camino = []
+
+def camino_corto_pc_a_guarani(grafo):
+    pcs = ["Manjaro", "Parrot", "Fedora", "Ubuntu", "Mint"]    
+    pc_mas_cercana = None
+    mejor_resultado = {}
+    distancia_minima = math.inf
     
     for pc in pcs:
-        path = red.dijkstra(pc)
+        path = grafo.dijkstra(pc)
+        destination = 'Guarani'
+        peso_total = None
+        camino_completo = []
         
-        # Buscar camino a Guarani
-        temp_list = []
         while path.size() > 0:
-            temp_list.append(path.pop())
+            value = path.pop()
+            if value[0] == destination: 
+                if peso_total is None:
+                    peso_total = value[1] 
+                camino_completo.append(value[0])
+                destination = value[2] 
         
-        for valor in temp_list:
-            nombre_vertice = valor[0]
-            costo = valor[1]
-            
-            if nombre_vertice == destino:
-                if costo < mejor_costo:
-                    mejor_costo = costo
-                    mejor_pc = pc
-                    # Reconstruir camino
-                    camino = [destino]
-                    actual = valor[2]
-                    while actual is not None:
-                        camino.insert(0, actual)
-                        for v in temp_list:
-                            if v[0] == actual:
-                                actual = v[2]
-                                break
-                    mejor_camino = camino
-                break
+        camino_completo.reverse()
+
+        # Solo guardar si es la más cercana
+        if peso_total is not None and peso_total < distancia_minima:
+            distancia_minima = peso_total
+            pc_mas_cercana = pc
+            mejor_resultado = {
+                pc: {
+                    "camino": camino_completo,
+                    "distancia": peso_total
+                }
+            }
     
-    print(f"PC con camino más corto a Guarani: {mejor_pc}")
-    print(f"Camino: {' -> '.join(mejor_camino)}")
-    print(f"Costo total: {mejor_costo}")
+    return mejor_resultado if pc_mas_cercana else False
 
 # f. indicar desde que computadora del switch 01 es el camino más corto
 # al servidor “MongoDB”;
-def camino_corto_switch1_a_mongodb(red):
-    computadoras_switch1 = ["Ubuntu", "Mint", "Debian"]
-    destino = "MongoDB"
+
+def camino_corto_switch1_a_mongodb(grafo):
+    pcs = ["Ubuntu", "Mint"]    
+    pc_mas_cercana = None
+    mejor_resultado = {}
+    distancia_minima = math.inf
     
-    mejor_computadora = None
-    mejor_costo = float('inf')
-    mejor_camino = []
-    
-    for comp in computadoras_switch1:
-        path = red.dijkstra(comp)
+    for pc in pcs:
+        path = grafo.dijkstra(pc)
+        destination = 'MongoDB'
+        peso_total = None
+        camino_completo = []
         
-        # Buscar camino a MongoDB
-        temp_list = []
         while path.size() > 0:
-            temp_list.append(path.pop())
+            value = path.pop()
+            if value[0] == destination: 
+                if peso_total is None:
+                    peso_total = value[1] 
+                camino_completo.append(value[0])
+                destination = value[2] 
         
-        for valor in temp_list:
-            nombre_vertice = valor[0]
-            costo = valor[1]
-            
-            if nombre_vertice == destino:
-                if costo < mejor_costo:
-                    mejor_costo = costo
-                    mejor_computadora = comp
-                    # Reconstruir camino
-                    camino = [destino]
-                    actual = valor[2]
-                    while actual is not None:
-                        camino.insert(0, actual)
-                        for v in temp_list:
-                            if v[0] == actual:
-                                actual = v[2]
-                                break
-                    mejor_camino = camino
-                break
+        camino_completo.reverse()
+
+        # Solo guardar si es la más cercana
+        if peso_total is not None and peso_total < distancia_minima:
+            distancia_minima = peso_total
+            pc_mas_cercana = pc
+            mejor_resultado = {
+                pc: {
+                    "camino": camino_completo,
+                    "distancia": peso_total
+                }
+            }
     
-    print(f"Computadora del Switch1 con camino más corto a MongoDB: {mejor_computadora}")
-    print(f"Camino: {' -> '.join(mejor_camino)}")
-    print(f"Costo total: {mejor_costo}")
+    return mejor_resultado if pc_mas_cercana else False
 
 
 # g. cambiar la conexión de la impresora al router 02 y vuelva a resolver el punto b;
@@ -229,23 +199,28 @@ def cambiar_conexion_impresora(red):
     # Agregar nueva conexión de la impresora con Router2
     red.insert_edge("Impresora", "Router2", 15)
     
-    print("Conexión cambiada: Impresora ahora conectada a Router2")
-    
-    #lo llamo on la nueva conexion
+    #lo llamo de nuevo a la nueva conexion
     barridos_desde_notebooks(red)
+
+        
 
 #MAIN:
 crear_red()
-red.show()
+# red.show()
 print()
 barridos_desde_notebooks(red)
 print()
-camino_corto_a_impresora(red)
+print("Camino mas corto de cada uno (Manjaro, Red Hat, Fedora) hasta impresora:")
+print(camino_corto_a_impresora(red))
 print()
-arbol_expansion_minima(red)
+print("Arbol de expansion minima (importa siempre el peso) desde impresora por ejemplo:")
+print(arbol_expansion_minima(red,"Impresora")) #aca eligo desde impresora por ejemplo
 print()
-camino_corto_pc_a_guarani(red)
+resultado=camino_corto_pc_a_guarani(red)
+print(f"El camino más corto hasta el servidor “Guaraní” entre las PCs es: {resultado}")
 print()
-camino_corto_switch1_a_mongodb(red)
+resultado1=camino_corto_switch1_a_mongodb(red)
+print(f"El camino mas corto indicar de las computadora del switch 01 al servidor “MongoDB” es: {resultado1}")
 print()
-cambiar_conexion_impresora(red)
+print("Conexión cambiada: Impresora ahora conectada a Router2: ")
+print(cambiar_conexion_impresora(red))

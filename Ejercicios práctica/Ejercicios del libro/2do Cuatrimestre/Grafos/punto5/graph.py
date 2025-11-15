@@ -50,8 +50,8 @@ class Graph(List):
     def insert_vertex(
         self,
         value: Any,
-        other_values: Optional[Any] = None) -> None: #añadido el other_values
-        node_vertex = Graph.__nodeVertex(value)
+        other_value: Optional[Any] = None) -> None: #añadido el other_values
+        node_vertex = Graph.__nodeVertex(value, other_values=other_value)
         self.append(node_vertex)
         
 
