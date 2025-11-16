@@ -1,13 +1,12 @@
 # 5. Cargar el esquema de red de la siguiente figura en un grafo e implementar los algoritmos nece-
 # sarios para resolver las tareas, listadas a continuación:
 
-#h. debe utilizar un grafo no dirigido.
-
 from graph import Graph
 from tarea import Tarea
 import math
 
-red = Graph(is_directed=False)
+#h. debe utilizar un grafo no dirigido.
+red = Graph(is_directed=False) 
 
 
 # a. cada nodo además del nombre del equipo deberá almacenar su tipo: pc, notebook, servi-

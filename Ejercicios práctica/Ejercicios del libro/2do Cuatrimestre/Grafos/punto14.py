@@ -26,52 +26,77 @@ def crear_casa(casa):
     for amb in ambientes:
         casa.insert_vertex(amb)
 
-    # b. cargar al menos tres aristas a cada vértice, y a dos de estas cárguele cinco, el peso de la arista es la distancia entre los ambientes, se debe cargar en metros;
+    # b. cargar al menos tres aristas a cada vértice, y a dos de estas cárguele cinco, el weight de la arista es la distancia entre los ambientes, se debe cargar en metros;
 
     conexiones = [
-        # Cocina (5 conexiones)
+        # Cocina (5)
         ("Cocina", "Comedor", 4),
         ("Cocina", "Patio", 6),
         ("Cocina", "SalaEstar", 7),
         ("Cocina", "Baño1", 5),
         ("Cocina", "Habitacion1", 8),
 
-        # Comedor (5 conexiones)
+
+        # Comedor (5)
         ("Comedor", "SalaEstar", 3),
         ("Comedor", "Patio", 5),
         ("Comedor", "Quincho", 12),
         ("Comedor", "Baño2", 6),
         ("Comedor", "Habitacion2", 9),
 
-        # Cochera (3 conexiones)
+
+        # Cochera (3)
         ("Cochera", "Patio", 10),
         ("Cochera", "Quincho", 14),
         ("Cochera", "Baño1", 11),
 
-        # Quincho (3 conexiones)
+
+        # Quincho (3)
         ("Quincho", "Terraza", 9),
         ("Quincho", "Patio", 7),
+        ("Quincho", "Habitacion2", 13),
 
-        # Baño1 (3 conexiones)
+
+        # Baño1 (3)
         ("Baño1", "Habitacion1", 4),
         ("Baño1", "SalaEstar", 6),
+        ("Baño1", "Baño2", 5),
 
-        # Baño2 (3 conexiones)
+
+        # Baño2 (3)
         ("Baño2", "Habitacion2", 5),
         ("Baño2", "SalaEstar", 4),
+        ("Baño2", "Terraza", 8),
 
-        # Habitacion1 (3 conexiones)
+
+        # Habitacion1 (3)
         ("Habitacion1", "SalaEstar", 8),
         ("Habitacion1", "Habitacion2", 6),
+        ("Habitacion1", "Terraza", 9),
 
-        # Habitacion2 (3 conexiones)
+
+        # Habitacion2 (3)
         ("Habitacion2", "Terraza", 10),
+        ("Habitacion2", "Patio", 7),
+        ("Habitacion2", "SalaEstar", 6),
 
-        # Sala de estar (3 conexiones)
+
+        # SalaEstar (3)
         ("SalaEstar", "Terraza", 8),
+        ("SalaEstar", "Patio", 5),
+        ("SalaEstar", "Quincho", 10),
 
-        # Patio (3 conexiones)
-        ("Patio", "Terraza", 12)
+
+        # Terraza (3)
+        ("Terraza", "Patio", 12),
+        ("Terraza", "Quincho", 9),
+        ("Terraza", "Cochera", 15),
+
+
+        # Patio (3)
+        ("Patio", "Cocina", 6),
+        ("Patio", "Comedor", 5),
+        ("Patio", "Habitacion2", 7),
     ]
 
     for a, b, metros in conexiones:
@@ -82,24 +107,21 @@ def crear_casa(casa):
 
 # c. obtener el árbol de expansión mínima y determine cuantos metros de cables se necesitan
 # para conectar todos los ambientes;
-def mst_casa(casa):
-    print("ÁRBOL DE EXPANSIÓN MÍNIMA")
+def arbol_expansion_minima_metros(casa, vertice):
+    print("ÁRBOL DE EXPANSIÓN MÍNIMA: ")
 
-    resultado = casa.kruskal("Cocina")  # origen arbitrario
-    aristas = resultado.split(";")
-
+    expansion_tree = casa.kruskal(vertice)  # origen arbitrario
     total_metros = 0
 
-    for arista in aristas:
-        partes = arista.split("-")
-        if len(partes) == 3:
-            origen, destino, peso = partes
-            peso = int(peso)
-            total_metros += peso
-            print(f"{origen} -- {destino} ({peso} m)")
+    for edge in expansion_tree.split(";"):
+        origin, destination, weight = edge.split("-")
+        weight = int(weight)
+        total_metros += weight
+        print(f"{origin} -- {destination} ({weight} m)")
 
     print(f"Total de metros necesarios: {total_metros} m")
     
+
 
 # d. determinar cuál es el camino más corto desde la habitación 1 hasta la sala de estar para
 # determinar cuántos metros de cable de red se necesitan para conectar el router con el
@@ -129,10 +151,12 @@ def habitacion1_sala(casa):
     return resultados
 
 
+
 #MAIN:
 casa = crear_casa(casa)
-casa.show()
+# casa.show()
 print()
-mst_casa(casa)
+arbol_expansion_minima_metros(casa,"Cocina") #elijo por ejemplo la cocina
 print()
-habitacion1_sala(casa)
+print("El camino más corto desde la habitación 1 hasta la sala de estar para determinar cuántos metros de cable de red se necesitan para conectar el router con el Smart Tv: ")
+print(habitacion1_sala(casa))
