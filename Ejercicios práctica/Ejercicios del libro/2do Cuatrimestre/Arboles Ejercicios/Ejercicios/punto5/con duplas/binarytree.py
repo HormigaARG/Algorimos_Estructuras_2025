@@ -131,7 +131,7 @@ class BinaryTree:
         
         return delete_value, deleter_other_values
     
-    def by_level(self):
+    def by_level(self): #muestra todos los nodos por nivel, comenzando desde la raíz y moviendose horizontalmente.
         tree_queue = Queue()
         if self.root is not None:
             tree_queue.arrive(self.root)
