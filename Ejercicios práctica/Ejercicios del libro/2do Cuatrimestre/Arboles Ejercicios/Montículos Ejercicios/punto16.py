@@ -8,7 +8,7 @@ from heap import HeapMax
 # Crear la cola de impresión
 cola_impresion = HeapMax()
 
-# a.a. cargue tres documentos de empleados (cada documento se representa solamente con un nombre).
+#a. cargue tres documentos de empleados (cada documento se representa solamente con un nombre).
 print("Los tres documentos de empleados se han cargado exitosamente.")
 cola_impresion.arrive("doc_empleado_1", 1)
 cola_impresion.arrive("doc_empleado_2", 1)
