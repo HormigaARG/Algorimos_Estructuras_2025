@@ -89,37 +89,47 @@ def contar_tipos_pokemon(arbol):
 
 # g-determinar cuantos Pokémons tienen megaevolucion.
 def contar_megaevolucion(arbol):
-    contador = 0
 
     def inOrder(node):
-        nonlocal contador
-        if node is not None:
-            inOrder(node.left)
-            if node.other_values.mega_evolucion:
-                contador += 1
-            inOrder(node.right)
+        if node is None:
+            return 0
+        
+        contador = 0
+        contador += inOrder(node.left)
+        
+        if node.other_values.mega_evolucion:
+            contador += 1
+        contador += inOrder(node.right)
+        return contador
 
+    total = 0
     if arbol.root is not None:
-        inOrder(arbol.root)
+        total = inOrder(arbol.root)
 
-    print(f"Cantidad de Pokémons con megaevolución: {contador}")
+    print(f"Cantidad de Pokémons con megaevolución: {total}")
+
 
 # h-determinar cuantos Pokémons tiene forma gigamax.
 def contar_gigamax(arbol):
-    contador = 0
 
     def inOrder(node):
-        nonlocal contador
-        if node is not None:
-            inOrder(node.left)
-            if node.other_values.forma_gigamax:
-                contador += 1
-            inOrder(node.right)
+        if node is None:
+            return 0
 
+        contador = 0
+        contador += inOrder(node.left)
+        if node.other_values.forma_gigamax:
+            contador += 1
+            
+        contador += inOrder(node.right)
+        return contador
+
+    total = 0
     if arbol.root is not None:
-        inOrder(arbol.root)
+        total = inOrder(arbol.root)
 
-    print(f"Cantidad de Pokémons con forma Gigamax: {contador}")
+    print(f"Cantidad de Pokémons con forma Gigamax: {total}")
+
 
 
 #MAIN:
