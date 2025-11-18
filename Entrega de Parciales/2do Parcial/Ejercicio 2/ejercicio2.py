@@ -36,21 +36,17 @@ def insertar_interacciones(graph):
 
 # b-hallar el árbol de expansión mínimo desde el vértice que contiene a: C3PO, Yoda y Leia;
 def arbol_expansion_minima(grafo, vertice_inicio):
-    resultado = grafo.kruskal(vertice_inicio)
-
+    expansion_tree = grafo.kruskal(vertice_inicio)
+    peso_total=0
     print(f"Árbol de expansión mínima desde {vertice_inicio}:")
-
-    aristas = resultado.split(';')
-    peso_total = 0
-
-    for item in aristas:
-        if '-' in item:
-            origen, destino, peso = item.split('-')
-            peso = int(peso)
-            print(f"{origen}  ---->  {destino}")
-            peso_total += peso
+    
+    for edge in expansion_tree.split(";"):
+        origin, destination, weight = edge.split("-")
+        print(f"{origin} -----> {destination}")
+        peso_total += int(weight)
 
     print(f"Peso total del árbol: {peso_total}")
+    
 
 # c-determinar cuál es el número máximo de episodio que comparten dos personajes, e indicar todos los pares de personajes que coinciden con dicho número;
 def max_episodios(graph):
